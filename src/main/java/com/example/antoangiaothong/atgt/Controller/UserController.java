@@ -29,6 +29,11 @@ public class UserController {
         this.videoService=videoService;
         this.roleRepository = roleRepository;
     }
+
+//    @GetMapping("/createRole")
+//    public ResponseEntity<?> createRole(){
+//
+//    }
     @GetMapping("/video")
     @ResponseBody
     public Collection<Video> getVideo(){
