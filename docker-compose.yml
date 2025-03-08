@@ -3,12 +3,12 @@ version: '3.8'
 services:
   # SQL Server service
   db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server
     container_name: mssql-server
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=123
-      - MSSQL_PID=Express
+#      - MSSQL_PID=Express
     ports:
       - "1431:1433"
     volumes:
