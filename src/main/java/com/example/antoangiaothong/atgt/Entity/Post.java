@@ -24,13 +24,13 @@ public class Post {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "title", columnDefinition = "nvarchar(max)")
+    @Column(name = "title",columnDefinition = "text")
     private String title;
 
-    @Column(name = "content",columnDefinition = "nvarchar(max)")
+    @Column(name = "content",columnDefinition = "text")
     private String content;
 
-    @Column(name = "image", columnDefinition = "nvarchar(max)")
+    @Column(name = "image", columnDefinition = "text")
     private String image;
 
     @Column(name = "time")

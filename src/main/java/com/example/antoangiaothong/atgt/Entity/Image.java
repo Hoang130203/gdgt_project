@@ -15,7 +15,7 @@ public class Image {
     @Column(name="id")
     private int id;
 
-    @Column(name="url",columnDefinition = "nvarchar(max)")
+    @Column(name="url",columnDefinition = "text")
     private String url;
 
     @JoinColumn(name = "owner")

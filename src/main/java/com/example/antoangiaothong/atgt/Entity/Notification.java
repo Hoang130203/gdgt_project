@@ -20,13 +20,13 @@ public class Notification {
     @Column(name = "time")
     private Timestamp time;
 
-    @Column(name = "content",columnDefinition = "nvarchar(1000)")
+    @Column(name = "content",columnDefinition = "text")
     private String content;
 
     @Column(name = "type")
     private String type;
 
-    @Column(name = "link_to",columnDefinition = "varchar(max)")
+    @Column(name = "link_to",columnDefinition = "text")
     private String linkTo;
 
     @ManyToOne(cascade = CascadeType.ALL)

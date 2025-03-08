@@ -1,49 +1,56 @@
 version: '3.8'
 
 services:
-  # SQL Server service
+  # PostgreSQL service
   db:
-    image: mcr.microsoft.com/mssql/server
-    container_name: mssql-server
+    image: postgres:15
+    container_name: postgres-server
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=123
-#      - MSSQL_PID=Express
+      - POSTGRES_USER=sa
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=gdgt_project
     ports:
-      - "1431:1433"
+      - "5435:5432"
     volumes:
-      - mssql-data:/var/opt/mssql
+      - postgres-data:/var/lib/postgresql/data
     networks:
       - spring-network
     healthcheck:
-      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$$SA_PASSWORD" -Q "SELECT 1" || exit 1
+      test: ["CMD-SHELL", "pg_isready -U sa -d gdgt_project"]
       interval: 10s
-      timeout: 3s
-      retries: 10
+      timeout: 5s
+      retries: 5
       start_period: 10s
 
   # Spring Boot application
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: spring-boot-app
     ports:
-      - "8080:8080"
+      - "8087:8087"
     depends_on:
       db:
         condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:sqlserver://db:1433;databaseName=gdgt_project;trustServerCertificate=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/gdgt_project
       - SPRING_DATASOURCE_USERNAME=sa
       - SPRING_DATASOURCE_PASSWORD=123
       - SPRING_JPA_HIBERNATE_DDL-AUTO=update
-      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.SQLServerDialect
-      - SERVER_PORT=8080
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_JPA_SHOW-SQL=true
+      - SERVER_PORT=8087
+    volumes:
+      - .m2:/root/.m2
     networks:
       - spring-network
+    stdin_open: true
+    tty: true
 
 networks:
   spring-network:
     driver: bridge
 
 volumes:
-  mssql-data:
+  postgres-data:

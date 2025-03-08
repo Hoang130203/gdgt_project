@@ -17,7 +17,7 @@ public class FeedBack {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "content",columnDefinition = "nvarchar(max)")
+    @Column(name = "content",columnDefinition = "text")
     private String content;
 
     @Column(name = "time")

@@ -22,7 +22,7 @@ public class User {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "name",nullable = false,columnDefinition = "nvarchar(1000)")
+    @Column(name = "name",nullable = false,columnDefinition = "text")
     private  String name;
 
     @Column(name = "avatar")

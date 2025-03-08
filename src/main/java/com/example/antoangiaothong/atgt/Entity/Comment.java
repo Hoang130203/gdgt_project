@@ -20,7 +20,7 @@ public class Comment {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "content",columnDefinition = "nvarchar(max)")
+    @Column(name = "content",columnDefinition = "text")
     private String content;
 
     @Column(name = "time")

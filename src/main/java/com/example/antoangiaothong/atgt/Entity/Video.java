@@ -20,7 +20,7 @@ public class Video {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "title",columnDefinition = "nvarchar(3000)")
+    @Column(name = "title",columnDefinition = "text")
     private String title;
 
     @Column(name = "youtube_id")

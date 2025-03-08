@@ -19,7 +19,7 @@ public class Exam {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name",columnDefinition = "nvarchar(2000)")
+    @Column(name = "name",columnDefinition = "text")
     private String name;
 
     @Column(name = "time")
